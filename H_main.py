@@ -1,6 +1,7 @@
 import numpy as np
 
-import funciones as f
+import H_funciones as f
+import H_graficas as g
 
 # Datos de las capitales y sus coordenadas
 capitales = [
@@ -67,7 +68,7 @@ while True:
     mejor_ruta, mejor_distancia = f.tsp_knn(ciudad_inicial, capitales, distancias, nombres)
 
     # Imprimir la mejor ruta y su distancia
-    f.imprimirRuta(ciudad_inicial, nombres, mejor_ruta, mejor_distancia, latitudes, longitudes)
+    g.imprimirRuta(ciudad_inicial, nombres, mejor_ruta, mejor_distancia, latitudes, longitudes)
 
     # Preguntar al usuario si desea continuar
     continuar = input("¿Desea calcular otra ruta? (s/n): ").lower()
