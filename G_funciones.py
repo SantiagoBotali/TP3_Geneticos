@@ -27,21 +27,6 @@ def fitness(cromosoma, matriz_distancias):
     distancia += matriz_distancias[cromosoma[-1]-1][cromosoma[0]-1]  # Cerrar el ciclo
     return distancia
 
-def seleccionRuleta(poblacion, fitness):
-    padres = []
-    n = len(poblacion)
-    total = sum(fitness)
-    probs = [f / total for f in fitness]
-
-    for _ in range(n-1):
-        r = random.random()
-        acumulado = 0
-        for i, p in enumerate(probs):
-            acumulado += p
-            if r < acumulado:
-                padres.append(poblacion[i])
-                break
-    return padres
 
 def seleccionTorneo(poblacion, fitness):
     padres = []
@@ -88,12 +73,14 @@ def cruce(padre1, padre2, prob_cruce):
 
 def mutacion(cromosoma, Pm):
     if(random.random() < Pm):
-        print("Mutacion!!!! MUTANTEEEEEEE")
+        print("Mutacion!!!! MUTANTEEEEEEE  -O.O-")
+        print("cromo antes de mutar", cromosoma)
         i = random.randint(1, len(cromosoma) - 1)
         j = random.randint(1, len(cromosoma) - 1)
         aux = cromosoma[i]
         cromosoma[i] = cromosoma[j]
         cromosoma[j] = aux
+        print("cromo despues de mutar", cromosoma)
 
-    return cromosoma
+    # return cromosoma
 

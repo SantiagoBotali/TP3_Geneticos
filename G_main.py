@@ -1,6 +1,7 @@
 import numpy as np
 
 import G_funciones as f
+import G_graficas as g
 
 # Datos de las capitales y sus coordenadas
 capitales = [
@@ -49,13 +50,10 @@ N = 50
 # Cantidad de ciclos
 ciclos = 200
 # Probabilidad de mutacion
-Pm = 0.05
+Pm = 0.3
 # Probabilidad de cruce
-Pc = 0.7
+Pc = 0.5
 
-metodo = int(input("Ingrese el metodo de seleccion: 1. Ruleta 2. Torneo: "))
-while (metodo != 1 and metodo != 2):
-    metodo = int(input("Ingrese el metodo de seleccion: 1. Ruleta 2. Torneo: "))
 
 print("Capitales disponibles:")
 for i, nombre in enumerate(nombres):
@@ -73,10 +71,7 @@ for c in range(ciclos):
     # arreglo de fitness
     fitness = [f.fitness(cromosoma, distancias) for cromosoma in poblacion] 
     # Seleccion de padres
-    if metodo == 1:
-        padres = f.seleccionRuleta(poblacion, fitness)
-    else:
-        padres = f.seleccionTorneo(poblacion, fitness)
+    padres = f.seleccionRuleta(poblacion, fitness)
 
     hijos = []
     for i in range(0, len(padres)-1, 2):
@@ -85,9 +80,13 @@ for c in range(ciclos):
         hijos.append(hijo2)
     
     for cromosoma in hijos:
-        print("cromosoma", cromosoma)
-        cromosoma = f.mutacion(cromosoma, Pm)
+        print("Cromosoma: ", cromosoma)
+        f.mutacion(cromosoma, Pm)
     
+    print("-----------------")
+    for k in hijos:
+        print("Hijo: ", k)
+    print("-----------------")
     poblacion = hijos
 
     poblacion.sort(key=lambda x: f.fitness(x, distancias))
@@ -95,3 +94,7 @@ for c in range(ciclos):
     mejor_ruta = poblacion[0]
     print(f"Mejor ruta, ciclo {c+1}: {mejor_ruta}")
     print(f"Distancia: {f.fitness(mejor_ruta, distancias)}")
+
+
+# Imprimir la mejor ruta y su distancia
+g.imprimirRuta(nombres[ciudad_inicio-1], nombres, mejor_ruta, f.fitness(mejor_ruta, distancias), latitudes, longitudes)

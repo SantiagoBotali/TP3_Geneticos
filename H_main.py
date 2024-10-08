@@ -65,8 +65,9 @@ while True:
     ciudad_inicial = mostrar_menu()
 
     # Calculo KNN
+    
     mejor_ruta, mejor_distancia = f.tsp_knn(ciudad_inicial, capitales, distancias, nombres)
-
+    print("MEJOR RUTA: ", mejor_ruta)
     # Imprimir la mejor ruta y su distancia
     g.imprimirRuta(ciudad_inicial, nombres, mejor_ruta, mejor_distancia, latitudes, longitudes)
 
